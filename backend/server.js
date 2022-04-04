@@ -28,7 +28,8 @@ const express   = require("express"),
 
     // simple route
     app.get("/", (req, res) => {
-        res.json({ message: "Welcome to API V1.0.0" });
+        console.log(__dirname);
+        res.sendFile(path.join(__dirname+'/view/index.html'));
     });
 
     const db = require("./app/config/db.config");
