@@ -139,5 +139,25 @@ module.exports = {
                 message:"Area deleted successfully"
             });
         });
+    },
+
+    rainOuts: (req, res) => {
+        let data = {
+            Date_: req.body.date,
+            Area_ID: req.body.area_id
+        }
+        let query = "INSERT INTO rainouts SET ?";
+
+        db.query(query, data, async (err, results) => {
+            if(err) {
+                return res.status(400).send({
+                    message:"Something went wrong! Please try again later " + err.message
+                });
+            }
+
+            return res.status(400).send({
+                message:"Rain out added successfully"
+            });
+        });
     }
 }
