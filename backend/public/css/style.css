@@ -11,18 +11,6 @@
     height: 100vh;
 }
 
-.navbar{
-    width: 1200px;
-    height: 75px;
-    margin: auto;
-}
-
-.icon{
-    width: 200px;
-    float: left;
-    height: 70px;
-}
-
 .logo{
     color: #49affd;
     font-size: 25px;
@@ -37,11 +25,6 @@
     text-overflow: ellipsis;
 }
 
-.menu{
-    width: 400px;
-    float: left;
-    height: 70px;
-}
 
 ul{
     float: left;
@@ -69,6 +52,16 @@ ul li a:hover{
     color: #49affd;
 }
 
+.card-login-form{
+    background: #4e555b;
+    color: #ffffff;
+}
+
+.card-login-form h2{
+    font-size: 22px;
+    font-family: monospace;
+}
+
 .search{
     width: 330px;
     float: left;
@@ -90,81 +83,12 @@ ul li a:hover{
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
 }
-.label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-}
-.form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-.form-group {
-    margin-bottom: 0.25rem;
-    display: inline;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-right: -5px;
-    margin-left: -5px;
-}
-
-.form-text {
-    display: block;
-    margin-top: 0.25rem;
-}
-
-.form-row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -5px;
-    margin-left: -5px;
-}
-
-.form-row > .col,
-.form-row > [class*="col-"] {
-    padding-right: 5px;
-    padding-left: 5px;
-}
-.btn{
-    width: 100px;
-    height: 40px;
-    background: #49affd;
-    border: 2px solid #49affd;
-    margin-top: 13px;
-    color: #fff;
-    font-size: 15px;
-    border-bottom-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    transition: 0.2s ease;
-    cursor: pointer;
-}
-.btn:hover{
-    color: #000;
-}
-
-.btn:focus{
-    outline: none;
-}
 
 .srch:focus{
     outline: none;
 }
 
 .content{
-    width: 1200px;
     height: auto;
     margin: auto;
     color: #fff;
@@ -217,12 +141,8 @@ ul li a:hover{
 }
 
 .form{
-    width: 250px;
     height: 380px;
     background: linear-gradient(to top, rgba(0,0,0,0.8)50%,rgba(0,0,0,0.8)50%);
-    position: absolute;
-    top: -20px;
-    left: 870px;
     transform: translate(0%,-5%);
     border-radius: 10px;
     padding: 25px;

@@ -17,6 +17,8 @@ const express   = require("express"),
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         next();
     });
+
+    app.use(express.static(__dirname + '/public'));
     
     app.options('*', cors(corsOptions));
     
@@ -29,7 +31,7 @@ const express   = require("express"),
     // simple route
     app.get("/", (req, res) => {
         console.log(__dirname);
-        res.sendFile(path.join(__dirname+'/view/index.html'));
+        res.sendFile(path.join(__dirname+'/public/index.html'));
     });
 
     const db = require("./app/config/db.config");
