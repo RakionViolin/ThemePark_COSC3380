@@ -1,3 +1,4 @@
+import callApi from '../services/callApi.js';
 export default {
     template: `
     <div class="row mt-2">
@@ -31,7 +32,7 @@ export default {
                 </div>
                 
                 <div class="row pl-4">
-                    <p class="link">Don't have an account? <a href="/register">Sign up </a> here</a></p>
+                    <p class="link">Don't have an account? <a href="#/register">Sign up </a> here</a></p>
                 </div>
                 
             </div>
@@ -57,7 +58,7 @@ export default {
             }
 
             var root = this;
-            axios.post('api/v0/auth/login', data)
+            callApi.login(data)
                 .then(function (response) {
                     if(response.data.status == 200) {
                         localStorage.setItem('user', JSON.stringify(response.data.user));

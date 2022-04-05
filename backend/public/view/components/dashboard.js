@@ -69,7 +69,7 @@ export default {
             }
 
             var root = this;
-            axios.post('api/v0/auth/login', data)
+            axios.post('api/v0/auth/login', data, )
                 .then(function (response) {
                     if(response.data.status == 200) {
                         localStorage.setItem('user', JSON.stringify(response.data.user));

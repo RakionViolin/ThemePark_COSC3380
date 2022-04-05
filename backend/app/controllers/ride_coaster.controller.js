@@ -149,8 +149,8 @@ module.exports = {
 
     createTicket: (req, res) => {
         //Create row for ticket table
-        const Rides_coaster_ID = req.body.ride_coaster_ID;
-        const customer_ID = req.body.customer_ID;
+        const Rides_coaster_ID = req.body.ride_coaster_id;
+        const customer_ID = req.user.user_id;
         const price = req.body.price;
         const admission_date = req.body.admission_date;
 
