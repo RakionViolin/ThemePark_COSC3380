@@ -67,12 +67,14 @@ module.exports = {
 
         db.query(query, async(err, results) => {
             if(err){
-                return res.status(400).send({
+                return res.status(200).send({
+                    status: 400,
                     message:"Something went wrong! Please try again later 2"
                 });
             }
 
             return res.status(200).send({
+                status: 200,
                 area: results[0]
             });
         });
@@ -80,7 +82,7 @@ module.exports = {
 
     getAreas: (req, res) => {
         let query = `SELECT * FROM area`;
-
+        console.log(query);
         db.query(query, async(err, results) => {
             if(err){
                 return res.status(400).send({

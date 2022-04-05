@@ -13,11 +13,13 @@ let registerController = {
         const password = req.body.password;
 
         if(!validator.validate(email)){
-            return res.status(400).send({
+            return res.status(200).send({
+                status: 400,
                 message:"Provided email address is invalid"
             });
         }else if(password === ''){
-            return res.status(400).send({
+            return res.status(200).send({
+                status: 400,
                 message:"Password can not be blank"
             });
         }else{
@@ -28,7 +30,8 @@ let registerController = {
                 let data = results[0];
 
                 if(data){
-                    return res.status(400).send({
+                    return res.status(200).send({
+                        status: 400,
                         message:"User already exist with this email address"
                     });
                 }else{
@@ -70,11 +73,13 @@ let registerController = {
         const password = req.body.password;
 
         if(!validator.validate(email)){
-            return res.status(400).send({
+            return res.status(200).send({
+                status: 400,
                 message:"Provided email address is invalid"
             });
         }else if(password === ''){
-            return res.status(400).send({
+            return res.status(200).send({
+                status: 400,
                 message:"Password can not be blank"
             });
         }else{
@@ -83,15 +88,24 @@ let registerController = {
             db.query(sqlQuery, async (err, results) => {
                 if(err) throw err;
                 let data = results[0];
-                const validPassword = await bcrypt.compare(req.body.password, data.password);
-                if(!validPassword)
-                    return res.status(400).send({
-                        message:"Invalid password or user does not exist"
-                    });
+                if(data){
+                    const validPassword = await bcrypt.compare(password, data.password);
+                    if(!validPassword)
+                        return res.status(200).send({
+                            status: 200,
+                            message:"Invalid password or user does not exist"
+                        });
 
-                else{
-                    return gerUserCreateResponse(data, res);
+                    else{
+                        return gerUserCreateResponse(data, res);
+                    }
+                }else{
+                    return res.status(200).send({
+                        status: 400,
+                        message:"Invalid credentials submitted"
+                    });
                 }
+
             });
         }
     }
@@ -109,6 +123,7 @@ function gerUserCreateResponse(data, res){
     }
 
     return res.status(200).header('Authorization').send({
+        status: 200,
         accessToken: token,
         user: user
     });
