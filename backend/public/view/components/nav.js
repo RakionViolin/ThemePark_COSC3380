@@ -1,5 +1,4 @@
 import router from '../router/router.js';
-// import EventBus from './event-bus.js';
 
 export default {
     template: `
@@ -26,15 +25,10 @@ export default {
 
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown" v-if="loggedIn">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span>{{username}}<span
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item page" v-on:click="logout" href="#">Logout</a>
-                    </div>
-                </li>
 
+                <li class="nav-item active"  v-if="loggedIn">
+                    <a class="nav-link page" href="#/register" v-on:click="logout">{{username}} (Logout)</a>
+                </li>
                 <li class="nav-item active"  v-if="needLogin">
                     <a class="nav-link page" href="#/register">Register</a>
                 </li>
@@ -61,9 +55,10 @@ export default {
         let user = JSON.parse(localStorage.getItem("user"));
         if(user){
             this.loggedIn = true;
-            this.username = user.name;
+            this.username = user.full_name;
             this.needLogin = false;
             console.log("user name in created "+ this.username);
+            router.push({name: 'Dashboard'})
         }
     },
     methods: {
@@ -75,12 +70,7 @@ export default {
         }
     },
     mounted () {
-        var self = this;
-        /*EventBus.$on('IS_LOGGEDIN', function (_user) {
-            self.loggedIn = true;
-            self.username = _user.name;
-            self.needLogin = false;
-        });*/
+
     }
 
 }

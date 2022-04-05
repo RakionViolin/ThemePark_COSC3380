@@ -62,6 +62,15 @@ ul li a:hover{
     font-family: monospace;
 }
 
+.dashboard-body{
+    height:88vh;
+}
+
+.card-buy-ticket{
+    padding: 2%;
+    border-left: 1px solid #4e555b;
+}
+
 .search{
     width: 330px;
     float: left;
