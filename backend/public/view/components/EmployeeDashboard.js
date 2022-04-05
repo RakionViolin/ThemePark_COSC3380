@@ -1,3 +1,4 @@
+import callApi from '../services/callApi.js';
 export default {
     template: `
     <div class="row mt-2">
@@ -5,13 +6,14 @@ export default {
         <div class="card dashboard-body">
                 <div class="row">
                     <div class="col-md-7 pt-5 pl-5 pb-5">
-                        <h3>Purchase history</h3>
+                        <h3>Manage Maintenance</h3>
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Ride Coaster</th>
-                                    <th>Admission Date</th>
-                                    <th>Price</th>
+                                    <th>Started Date</th>
+                                    <th>Completed Date</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             
@@ -19,17 +21,20 @@ export default {
                                 <tr>
                                     <td>McDermott-Konopelski</td>
                                     <td>30 April 2021</td>
-                                    <td>$18</td>
+                                    <td>03 May 2021</td>
+                                    <td>
+                                        <button class="btn btn-outline-primary">Edit</button>
+                                        <button class="btn btn-outline-danger">Delete</button>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Prosacco-Johns</td>
                                     <td>30 April 2021</td>
-                                    <td>$20</td>
-                                </tr>
-                                <tr>
-                                    <td>Barton, Mosciski and Yost</td>
-                                    <td>08 June 2021</td>
-                                    <td>$22</td>
+                                    <td>03 May 2021</td>
+                                    <td>
+                                        <button class="btn btn-outline-primary">Edit</button>
+                                        <button class="btn btn-outline-danger">Delete</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -38,29 +43,29 @@ export default {
                     <div class="col-md-5 pt-5 pr-5 pb-5">
                         <div class="card">
                             <div class="card-header bg-dark text-white">
-                                <h6 class="text-center">Buy Ticket</h6>
+                                <h5 class="text-center">Add Maintenance</h5>
                             </div>
                             <form class="card-body">
                                 <div class="form-group">
                                     <label for="rides_coaster">Rides Coaster</label>
-                                    <select class="form-control" id="rides_coaster" v-model="formData.rides_coaster">
-                                        <option>1</option>
-                                        <option>2</option>
+                                    <select class="form-control" id="rides_coaster" v-model="formData.Rides_Coaster_ID">
+                                        <option>McDermott-Konopelski</option>
+                                        <option>Prosacco-Johns</option>
                                     </select>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="admission_date">Admission Date</label>
-                                    <input type="date" class="form-control" id="admission_date" v-model="formData.admission_date">
+                                    <label>Started Date</label>
+                                    <input type="date" class="form-control" v-model="formData.Date_Started">
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="price">Price</label>
-                                    <input type="number" class="form-control" id="price" v-model="formData.price">
+                                    <label>Completed Date</label>
+                                    <input type="date" class="form-control" v-model="formData.Date_Completed">
                                 </div>
                                 
                                 <div class="form-group text-center">
-                                    <button class="btn btn-primary" @click="Purchase">Purchase</button>
+                                    <button class="btn btn-primary" @click="AddMaintenance">Save</button>
                                 </div>
                             </form> 
                         </div>
@@ -73,23 +78,18 @@ export default {
     data () {
         return {
             formData: {
-                rides_coaster:'',
-                admission_date: '',
-                price: ''
+                Date_Started:'',
+                Date_Completed: '',
+                Rides_Coaster_ID: ''
             }
         }
     },
-    created: function () {
-
-    },
 
     methods: {
-        Purchase: function(){
-            var root = this;
-            axios.post('api/v0/auth/login', formData, )
+        AddMaintenance: function(){
+            callApi.addMaintenance(formData)
                 .then(function (response) {
                     if(response.data.status == 200) {
-                        localStorage.setItem('user', JSON.stringify(response.data.user));
                         window.location.reload();
                     }
                     else alert(response.data.message);

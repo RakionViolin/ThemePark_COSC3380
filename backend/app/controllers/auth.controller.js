@@ -11,7 +11,7 @@ let registerController = {
         const user_type = req.body.user_type ? req.body.user_type : 'Customer';
         const email = req.body.email;
         const password = req.body.password;
-
+        console.log(password);
         if(!validator.validate(email)){
             return res.status(200).send({
                 status: 400,
@@ -36,7 +36,8 @@ let registerController = {
                     });
                 }else{
                     const salt = await bcrypt.genSalt(10);
-                    const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+                    const hashedPassword = await bcrypt.hash(password, salt);
 
                     let data = {
                         full_name,

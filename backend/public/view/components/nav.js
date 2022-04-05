@@ -25,6 +25,18 @@ export default {
 
             </ul>
             <ul class="navbar-nav ml-auto">
+                <template v-if="isAdmin">
+                    <li class="nav-item active">
+                        <a class="nav-link page" href="#/manage-user">Manage User</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link page" href="#/manage-area">Manage Area</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link page" href="#/manage-raider">Manage Rider</a>
+                    </li>
+                
+                </template>
 
                 <li class="nav-item active"  v-if="loggedIn">
                     <a class="nav-link page" href="#/register" v-on:click="logout">{{username}} (Logout)</a>
@@ -46,7 +58,8 @@ export default {
         return {
             loggedIn:false,
             username: '',
-            needLogin: true
+            needLogin: true,
+            isAdmin: false
         }
     },
     created: function () {
@@ -57,8 +70,16 @@ export default {
             this.loggedIn = true;
             this.username = user.full_name;
             this.needLogin = false;
-            console.log("user name in created "+ this.username);
-            router.push({name: 'Dashboard'})
+
+            if(user.user_type === 'Admin'){
+                router.push({name: 'AdminDashboard'});
+                this.isAdmin = true;
+            }
+            else if(user.user_type === 'Employee'){
+                router.push({name: 'EmployeeDashboard'});
+            }else{
+                router.push({name: 'Dashboard'});
+            }
         }
     },
     methods: {

@@ -57,7 +57,6 @@ export default {
                 password: this.password
             }
 
-            var root = this;
             callApi.login(data)
                 .then(function (response) {
                     if(response.data.status == 200) {

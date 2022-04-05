@@ -1,3 +1,4 @@
+import callApi from '../services/callApi.js';
 export default {
     template: `
     <div class="row mt-2">
@@ -14,24 +15,42 @@ export default {
         <div class="col-md-4">
             <div class="card p-4 card-login-form">
                 <h2 class="card-title text-center">Sign Up</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+             
+                    <input type="text" class="form-control" name="full_name" placeholder="Enter Email Here" v-model="full_name">
+                </div>
+                
+                <div class="form-group">
+                    <label>Date of Birth</label>
+             
+                    <input type="date" class="form-control" name="dob" placeholder="Enter Email Here" v-model="dob">
+                </div>
+                
+                
+                <div class="form-group">
+                    <label>Contact</label>
+             
+                    <input type="text" class="form-control" name="contact" placeholder="Enter Email Here" v-model="contact">
+                </div>
                 
                 <div class="form-group">
                     <label>Email Address</label>
              
-                    <input type="email" class="form-control" name="email" placeholder="Enter Email Here">
+                    <input type="email" class="form-control" name="email" placeholder="Enter Email Here" v-model="email">
                 </div>
                 
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" name="" placeholder="Enter Password Here">
+                    <input type="password" class="form-control" name="" placeholder="Enter Password Here" v-model="password">
                 </div>
                 
                 <div class="form-group text-center">
-                    <button class="btn btn-outline-primary"><a href="/login">Login</a></button>
+                    <button class="btn btn-outline-primary" @click="created">Register</button>
                 </div>
                 
                 <div class="row pl-4">
-                    <p class="link">Don't have an account? <a href="/register">Sign up </a> here</a></p>
+                    <p class="link">Already have an account? <a href="#/login">Login </a> here</a></p>
                 </div>
                 
             </div>
@@ -40,16 +59,35 @@ export default {
 
     data () {
         return {
-            pages: [],
-            page: [],
-            home: true
+            full_name: '',
+            dob: '',
+            contact: '',
+            email: '',
+            password: ''
         }
     },
-    created: function () {
-
-    },
-
     methods: {
+        created: function () {
+            let data = {
+                full_name: this.full_name,
+                dob: this.dob,
+                contact: this.dob,
+                email: this.email,
+                password: this.password
+            }
 
+            callApi.register(data)
+                .then(function (response) {
+                    if(response.data.status == 200) {
+                        localStorage.setItem('user', JSON.stringify(response.data.user));
+                        window.location.reload();
+                    }
+                    else alert(response.data.message);
+                })
+                .catch(function (error) {
+                    console.log(error.data.status);
+                    console.log(JSON.stringify(error))
+                });
+        }
     }
 }
