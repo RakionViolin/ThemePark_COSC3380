@@ -20,4 +20,10 @@ export default  {
     login: (data) => {
         return axios.post("/api/v0/auth/login", data, self.headers);
     },
+    getAreas: () => {
+        return axios.post("/api/v0/area", '', self.headers);
+    },
+    getAreaById: (id) => {
+        return axios.post("/api/v0/area/"+id, '', self.headers);
+    }
 }
